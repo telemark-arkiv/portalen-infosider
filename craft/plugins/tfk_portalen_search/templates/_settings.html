@@ -1,3 +1,25 @@
+{% import "_includes/forms" as forms %}
+{{ forms.textField({
+label: "Url til søk"|t,
+id: 'searchUrl',
+name: 'searchUrl',
+instructions: "Urlen til søket."|t,
+value: settings.searchUrl,
+errors: settings.getErrors('searchUrl')
+})
+}}
+
+{% import "_includes/forms" as forms %}
+{{ forms.textField({
+label: "Antall treff pr side"|t,
+id: 'hitsPerPage',
+name: 'hitsPerPage',
+instructions: "Endrer antall sidetreff på søket."|t,
+value: settings.hitsPerPage,
+errors: settings.getErrors('hitsPerPage')
+})
+}}
+
 
 
 

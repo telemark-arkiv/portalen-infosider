@@ -32,6 +32,8 @@ class Tfk_portalen_searchPlugin extends BasePlugin
     protected function defineSettings()
     {
         return array(
+            'searchUrl' => array(AttributeType::String, 'required' => true),
+            'hitsPerPage' => array(AttributeType::String, 'required' => true),
             );
     }
 
