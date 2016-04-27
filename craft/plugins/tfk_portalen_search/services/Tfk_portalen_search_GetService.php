@@ -37,8 +37,11 @@ class Tfk_portalen_search_GetService extends BaseApplicationComponent
 		
 		// get search url from settings
 		
+		$nFrom = 0;
+		if($this->nOffset >0)
+			$nFrom = $this->nOffset*$this->nHitsPerPage;
 
-		$jsonData = file_get_contents($this->strSearchUrl."?query=".$strSearchString."&size=".$this->nHitsPerPage."&from=".$this->nOffset);
+		$jsonData = file_get_contents($this->strSearchUrl."?query=".$strSearchString."&size=".$this->nHitsPerPage."&from=".$nFrom);
 		$objResult = json_decode($jsonData);
 	
 
@@ -47,13 +50,19 @@ class Tfk_portalen_search_GetService extends BaseApplicationComponent
 		$arrResult['result'] = array();
 		$arrResult['nLastPage'] = round($objResult->hits->total/$this->nHitsPerPage);
 		$arrResult['nTo'] = ($this->nOffset+1)*$this->nHitsPerPage;
-		$arrResult['nFrom'] = $arrResult['nTo']-$this->nHitsPerPage;
+
+		$arrResult['nFrom'] = 1;
+		if($nFrom != 0)
+			$arrResult['nFrom'] =$arrResult['nTo']-$this->nHitsPerPage+1;
+		if($arrResult['nTo'] > $arrResult['hits'])
+			$arrResult['nTo']	= $arrResult['hits'];
+
 
 		
 		//print "<pre>";
 		//print_r($objResult);
 
-		$nCounter = 0;
+		$nCounter = 1;
 		foreach($objResult->hits->hits as $objOneHit) {
 
 			$arrResult['result'][$nCounter]['title'] =$objOneHit->_source->title;

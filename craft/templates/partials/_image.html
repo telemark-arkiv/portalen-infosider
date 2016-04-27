@@ -1,0 +1,6 @@
+{% set image = block.image.first() %}
+	<img 	sizes="(min-width: 1232px) 1200px, calc(100% - 2em)" 
+			srcset="{{ image.getUrl(alias) }} 1200w" 
+			src="{{ image.getUrl(alias) }}" 
+			width= "{{ image.getWidth(alias) }}" 
+			height="{{ image.getHeight(alias) }}" alt="{{ image.title }}">

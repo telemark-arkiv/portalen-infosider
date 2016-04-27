@@ -1,11 +1,11 @@
 <?php
 namespace Craft;
 
-class Tfk_portalen_ssoPlugin extends BasePlugin
+class Tfk_portalen_ldapPlugin extends BasePlugin
 {
     function getName()
     {
-        return Craft::t('Telemarkportalen infosider sso');
+        return Craft::t('Telemarkportalen ldap authentication');
     }
 
     function getVersion()
@@ -26,14 +26,20 @@ class Tfk_portalen_ssoPlugin extends BasePlugin
 
     public function getSettingsHtml()
     {
-        return craft()->templates->render('tfk_portalen_sso/_settings', array('settings' => $this->getSettings()));
+        return craft()->templates->render('tfk_portalen_ldap/_settings', array('settings' => $this->getSettings()));
     }
 
     protected function defineSettings()
     {
         return array(
-
+            'ldap_url' => array(AttributeType::String, 'required' => true),
+            'bindDn' => array(AttributeType::String, 'required' => true),  
+            'bindCredentials' => array(AttributeType::String, 'required' => true),    
+            'searchBase' => array(AttributeType::String, 'required' => true),
+            'searchFilter' => array(AttributeType::String, 'required' => true),     
         );
+
+    
     }
 
     public function hasCpSection()
@@ -56,7 +62,7 @@ class Tfk_portalen_ssoPlugin extends BasePlugin
     }
     public function getMySetting()
     {
-        $plugin = craft()->plugins->getPlugin('tfk_portalen_sso');
+        $plugin = craft()->plugins->getPlugin('tfk_portalen_ldap');
         $settings = $plugin->getSettings();
 
         return $settings->mySetting;

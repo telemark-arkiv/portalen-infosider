@@ -12,8 +12,17 @@
 
 {% extends "_layout" %}
 {% set title = "News" %}
-
 {% block content %}
+
+{#{ craft.tfk_portalen_ldap.testPlugin }#}
+
+{% set bUserIsLoggedIn = craft.tfk_portalen_ldap.getLoginStatus %}
+
+{% if not bUserIsLoggedIn %}
+ {% include 'partials/_login.html' %} 
+   
+{% else %}
+	   {% include 'partials/_logout.html' %} 
 	<h1>News</h1>
 
 	{% for entry in craft.entries.section('articles').find() %}
@@ -24,5 +33,6 @@
 			<p><a href="{{ entry.url }}">Continue reading</a></p>
 		</article>
 	{% endfor %}
+	{% endif %}	
 {% endblock %}
 

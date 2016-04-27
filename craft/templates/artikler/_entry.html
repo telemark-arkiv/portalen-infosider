@@ -1,6 +1,15 @@
 {% extends "_layout" %}
 {% block content %}
 
+{#{ craft.tfk_portalen_ldap.testPlugin }#}
+
+{% set bUserIsLoggedIn = craft.tfk_portalen_ldap.getLoginStatus %}
+
+{% if not bUserIsLoggedIn %}
+ {% include 'partials/_login.html' %} 
+   
+{% else %}
+   {% include 'partials/_logout.html' %} 
 <div class="tfk-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
       <header class="tfk-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
         <div class="mdl-layout__header-row">
@@ -44,7 +53,7 @@
         </header>
         <nav class="tfk-navigation mdl-navigation mdl-color--blue-grey-800">
           <a class="mdl-navigation__link" href="index.html"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
-          <a class="mdl-navigation__link" href="article.html"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Article</a>
+          <a class="mdl-navigation__link" href="/artikler/"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Article</a>
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">delete</i>Trash</a>
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">report</i>Spam</a>
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">forum</i>Forums</a>
@@ -63,20 +72,55 @@
 
         <!-- article section start -->
 
-
         <div class="mdl-grid">
           <div class="article-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+
             <div class="mdl-crumbs mdl-color-text--grey-500">
+
+            {% set tags = entry.tags %}
+
+            {% if tags | length %}
+
+                
+                {% for tag in tags %}
+                    {{tag.title}}
+                {% endfor %}
+
+            {% endif %}
             {{ entry.article_intro}}
             {{ entry.article_description}}
+
+            {% for block in entry.article_blocks %}
+              {% if block.type == 'textBlock' %}
+             
+                {% include 'partials/_text.html' with {
+                                                          content : block.text, 
+                                                        
+                                                        } %} 
+
+              {% elseif block.type == 'htmlBlock' %}
+             
+                {% include 'partials/_text.html' with {
+                                                          content : block.html, 
+                                                        
+                                                        } %}                                           
+              {% elseif block.type == 'imageBlock' %}
+                {% include 'partials/_image.html' with { 
+                                                          image : block.image, 
+                                                          alias : block.imagealias,
+                                                          imageText : block.imageText
+                                                        } %} 
+                
+              {% endif %}
+
+            {% endfor %}
           </div>
+           
         </div>
 
-        <!-- article section end -->
-
-
+        
         </div>
-
+        
 
 
         <!-- Footer start -->
@@ -144,4 +188,5 @@
 
       </main>
     </div>
+  {% endif %}
 {% endblock %}    

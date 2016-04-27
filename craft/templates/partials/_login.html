@@ -1,0 +1,18 @@
+{% if craft.tfk_portalen_ldap.getErrorMessage %}
+    {{ craft.tfk_portalen_ldap.getErrorMessage }}
+  {% endif %}
+<form method="post" accept-charset="UTF-8" action="">
+  <input type="hidden" name="action" value="tfk_portalen_ldap/ldap/ldapLogin">
+
+  {{ getCsrfInput() }}
+
+
+  <h3><label for="loginName">Brukernavn</label></h3>
+  <input id="loginName" type="text" name="loginName" required="">
+
+  <h3><label for="password">Passord</label></h3>
+  <input id="password" type="password" name="password" required="">
+
+  <input type="submit" value="Login">
+
+</form>

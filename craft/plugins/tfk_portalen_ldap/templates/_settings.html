@@ -1,0 +1,52 @@
+{% import "_includes/forms" as forms %}
+{{ forms.textField({
+label: "Ldapserver"|t,
+id: 'ldap_url',
+name: 'ldap_url',
+instructions: "LdapServer."|t,
+value: settings.ldap_url,
+errors: settings.getErrors('ldap_url')
+})
+}}
+{% import "_includes/forms" as forms %}
+{{ forms.textField({
+label: "bindDn"|t,
+id: 'bindDn',
+name: 'bindDn',
+instructions: "BindDn."|t,
+value: settings.bindDn,
+errors: settings.getErrors('bindDn')
+})
+}}
+{% import "_includes/forms" as forms %}
+{{ forms.textField({
+label: "bindCredentials"|t,
+id: 'bindCredentials',
+name: 'bindCredentials',
+instructions: "bindCredentials."|t,
+value: settings.bindCredentials,
+errors: settings.getErrors('bindCredentials')
+})
+}}
+{% import "_includes/forms" as forms %}
+{{ forms.textField({
+label: "searchBase"|t,
+id: 'searchBase',
+name: 'searchBase',
+instructions: "searchBase."|t,
+value: settings.searchBase,
+errors: settings.getErrors('searchBase')
+})
+}}
+{% import "_includes/forms" as forms %}
+{{ forms.textField({
+label: "searchFilter"|t,
+id: 'searchFilter',
+name: 'searchFilter',
+instructions: "searchFilter."|t,
+value: settings.searchFilter,
+errors: settings.getErrors('searchFilter')
+})
+}}
+
+

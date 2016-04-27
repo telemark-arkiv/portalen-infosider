@@ -1,7 +1,7 @@
 <?php
 namespace Craft;
 
-class Tfk_portalen_sso_ApiService extends BaseApplicationComponent
+class Tfk_portalen_ldap_ApiService extends BaseApplicationComponent
 {
     /**
      *
@@ -12,7 +12,7 @@ class Tfk_portalen_sso_ApiService extends BaseApplicationComponent
      */
     public function getMySetting($strSettings)
     {
-        $plugin = craft()->plugins->getPlugin('tfk_portalen_sso');
+        $plugin = craft()->plugins->getPlugin('tfk_portalen_ldap');
         $settings = $plugin->getSettings();
 
         return $settings->$strSettings;
