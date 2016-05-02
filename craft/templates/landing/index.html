@@ -15,10 +15,18 @@
 {% block leftmenu %}
     {% include 'partials/_nav.html' %}
 {% endblock %}
-
+{% set arrArticles = "" %}
 {% block content %}
 <main class="mdl-layout__content mdl-color--grey-100">
+	{% set nCustomPageId =  craft.request.getQuery( 'id') %}
+	{% set matrixBlock = menu.navigation %}
 
+	{% for block in matrixBlock %}
+		
+		{% if block.nav_id == nCustomPageId %}
+			{% set arrArticles = block.nav_articles %}
+		{% endif %}
+	{% endfor %}
 	<div class="mdl-grid main-content">
 		{#{ craft.tfk_portalen_ldap.testPlugin }#}
 
@@ -30,13 +38,12 @@
 		{% else %}
 			<section class="mdl-cell mdl-cell--12-col">
 				<div class="mdl-grid">
-					{% for entry in craft.entries.section('articles').find() %}
+					{% for entry in arrArticles %}
 						{% if not entry.hideArticleFromListView %}
-							{% include 'partials/_cards.html' with 
-								{ title : entry.title, url : entry.url, desc : entry.article_intro , nThisCol : 4 }
-							%}
+						{% include 'partials/_cards.html' with 
+							{ title : entry.title, url : entry.url, desc : entry.article_intro , nThisCol : 4 }
+						%}
 						{% endif %}
-				
 					{% endfor %}
 				</div>
 			</section>
@@ -44,4 +51,3 @@
 	</div>
 </main>
 {% endblock %}
-

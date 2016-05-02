@@ -26,7 +26,7 @@
 					<div>Viser treff {{ arrSearchResult.nFrom}} - {{ arrSearchResult.nTo}} </div>
 					<div class="mdl-grid">
 						{% for result in arrSearchResult.result %}
-							{% include 'partials/_cards.html' with { title : result.title, url : result.url , desc : result.description} %}	
+							{% include 'partials/_cards.html' with { title : result.title, url : result.url , desc : result.description , bIsExtern : true} %}	
 							
 						{% endfor %}
 					</div>

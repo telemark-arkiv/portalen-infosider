@@ -18,9 +18,14 @@
 
 {% extends "_layout" %}
 {% set title = "404" %}
+{% block leftmenu %}
+    {% include 'partials/_nav.html' %}
+{% endblock %}
 
 {% block content %}
-	<h1>Page not found</h1>
-
-	<p>What’s worse, a hilarious 404 page can’t be found either.</p>
+	<main class="mdl-layout__content mdl-color--grey-100">
+		<div class="mdl-grid main-content">
+			<h1>Page not found</h1>
+		</div>
+	</main>
 {% endblock %}
