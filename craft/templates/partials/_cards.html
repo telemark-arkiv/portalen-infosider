@@ -1,39 +1,24 @@
-{% set cols = 4 %}
-{% if overRideCols is defined %}
-  {% set cols=overRideCols %}
-{% endif %}
-{% set bFirstInRow = false %}
-{% if overRideFirstInRow is defined and overRideFirstInRow == 1 %}
-  {% set bFirstInRow = true %}
-{% endif %}
-{% set bLastInRow = false %}
-{% if overRideLastInRow is defined and overRideLastInRow == 1 %}
-  {% set bLastInRow = true %}
-{% endif %}
+{% set nCols = 4 %}
 
-{% if bFirstInRow %}
-  <div class="mdl-grid">
-{% endif %}
-<div class="mdl-cell mdl-cell--12-col">
-  <div class="tfk-updates card-wide mdl-card mdl-shadow--2dp">
-    <div class="mdl-card__title">
-      <h2 class="mdl-card__title-text">{{title}}</h2>
-    </div>
-    <div class="mdl-card__supporting-text">
-      {{desc}}
-    </div>
-    <div class="mdl-card__actions mdl-card--border">
-      <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="{{url}}">
-       Mer
-      </a>
-    </div>
-    <div class="mdl-card__menu">
-      <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-        <i class="material-icons">share</i>
-      </button>
+
+  <div class="mdl-cell mdl-cell--4-col">
+    <div class="card-wide mdl-card mdl-shadow--2dp">
+      <div class="mdl-card__title">
+        <h2 class="mdl-card__title-text">{{title}}</h2>
+      </div>
+      <div class="mdl-card__supporting-text">
+        {{desc}}
+      </div>
+      <div class="mdl-card__actions mdl-card--border">
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="{{url}}">
+         Mer
+        </a>
+      </div>
+      <div class="mdl-card__menu">
+        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+          <i class="material-icons">share</i>
+        </button>
+      </div>
     </div>
   </div>
-</div>
-{% if bLastInRow %}
-  </div>
-{% endif %}
+

@@ -44,7 +44,8 @@ class Tfk_portalen_ldap_LdapController extends BaseController
 
 
 			$strUserBind = 'dc=domain,dc=com,uid=riemann';
-
+			craft()->httpSession->add('ldapUser', true);
+			return;
 			// binding to ldap server
 		    $ldapbind = ldap_bind($ds ,$strUserBind,"password");//,$strBindDn,$strPassword);
 		    // verify binding

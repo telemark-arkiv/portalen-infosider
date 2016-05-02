@@ -1,39 +1,49 @@
 {% extends "_layout" %}
 
-
-
+{% set bUserIsLoggedIn = craft.tfk_portalen_ldap.getLoginStatus %}
+{% block leftmenu %}
+    {% include 'partials/_nav.html' %}
+{% endblock %}
 {% block content %}
-	{% set strSearchParam = craft.request.getParam('query') %}
-	{% if craft.request.getParam('offset') is defined %}
-		{% set nOffset = craft.request.getParam('offset') %}
-	{% else %}
-		{% set nOffset = 1 %}	
-	{% endif %}		
-	{% set nHitsPerPage = craft.tfk_portalen_search.getHitsPerPage %}
-	{% set arrSearchResult =  craft.tfk_portalen_search.getSearchResult(strSearchParam,nOffset) %}
+	<main class="mdl-layout__content mdl-color--grey-100">
+		<div class="mdl-grid main-content">
+			{% if not bUserIsLoggedIn %}
+				{% include 'partials/_login.html' %} 
+			   
+			{% else %}
+				{% set strSearchParam = craft.request.getParam('query') %}
+				{% if craft.request.getParam('offset') is defined %}
+					{% set nOffset = craft.request.getParam('offset') %}
+				{% else %}
+					{% set nOffset = 1 %}	
+				{% endif %}		
+				{% set nHitsPerPage = craft.tfk_portalen_search.getHitsPerPage %}
+				{% set arrSearchResult =  craft.tfk_portalen_search.getSearchResult(strSearchParam,nOffset) %}
 
-	<section class="mdl-cell mdl-cell--12-col">
-		<div>Du søkte etter {{ strSearchParam }}</div>
-		<div>Totalt antall treff : {{arrSearchResult.hits}}</div>
-		<div>Viser treff {{ arrSearchResult.nFrom}} - {{ arrSearchResult.nTo}} </div>
-		<div class="mdl-grid">
-			{% for result in arrSearchResult.result %}
-
-				{% include 'partials/_cards.html' with { title : result.title, url : result.url , desc : result.description} %}	
+				<section class="mdl-cell mdl-cell--12-col">
+					<div>Du søkte etter {{ strSearchParam }}</div>
+					<div>Totalt antall treff : {{arrSearchResult.hits}}</div>
+					<div>Viser treff {{ arrSearchResult.nFrom}} - {{ arrSearchResult.nTo}} </div>
+					<div class="mdl-grid">
+						{% for result in arrSearchResult.result %}
+							{% include 'partials/_cards.html' with { title : result.title, url : result.url , desc : result.description} %}	
+							
+						{% endfor %}
+					</div>
+				</section>
 				
-			{% endfor %}
+			        {% include 'partials/_pagination.html' with
+			        	{
+			        		nHitsPerPage  : nHitsPerPage,
+				        	extremePagesLimit  : 1,
+				        	nearbyPagesLimit  :1 ,
+				        	showAlwaysFirstAndLast : false,
+				        	lastPage : arrSearchResult.nLastPage,
+				        	currentPage : arrSearchResult.nCurrentPage,
+				        	paginationPath : "/search/results?query=" ~ strSearchParam
+			        	}
+			         %}
+			{% endif %} 
 		</div>
-	</section>
-	
-        {% include 'partials/_pagination.html' with
-        	{
-        		nHitsPerPage  : nHitsPerPage,
-	        	extremePagesLimit  : 1,
-	        	nearbyPagesLimit  :1 ,
-	        	showAlwaysFirstAndLast : false,
-	        	lastPage : arrSearchResult.nLastPage,
-	        	currentPage : arrSearchResult.nCurrentPage,
-	        	paginationPath : "/search/results?query=" ~ strSearchParam
-        	}
-         %}
+	</main>        
 {% endblock %}

@@ -12,27 +12,37 @@
 
 {% extends "_layout" %}
 {% set title = "News" %}
+{% block leftmenu %}
+    {% include 'partials/_nav.html' %}
+{% endblock %}
+
 {% block content %}
+<main class="mdl-layout__content mdl-color--grey-100">
 
-{#{ craft.tfk_portalen_ldap.testPlugin }#}
+	<div class="mdl-grid main-content">
+		{#{ craft.tfk_portalen_ldap.testPlugin }#}
 
-{% set bUserIsLoggedIn = craft.tfk_portalen_ldap.getLoginStatus %}
+		{% set bUserIsLoggedIn = craft.tfk_portalen_ldap.getLoginStatus %}
 
-{% if not bUserIsLoggedIn %}
- {% include 'partials/_login.html' %} 
-   
-{% else %}
-	   {% include 'partials/_logout.html' %} 
-	<h1>News</h1>
+		{% if not bUserIsLoggedIn %}
+			{% include 'partials/_login.html' %} 
 
-	{% for entry in craft.entries.section('articles').find() %}
-		<article>
-			<h3><a href="{{ entry.url }}">{{ entry.title }}</a></h3>
-			<p>Posted on {{ entry.postDate.format('F d, Y') }}</p>
-			{{ entry.article_intro.getPage(1) }}
-			<p><a href="{{ entry.url }}">Continue reading</a></p>
-		</article>
-	{% endfor %}
-	{% endif %}	
+		{% else %}
+			{% include 'partials/_logout.html' %} 
+			<h1>News</h1>
+			<section class="mdl-cell mdl-cell--12-col">
+				<div class="mdl-grid">
+					{% for entry in craft.entries.section('articles').find() %}
+
+						{% include 'partials/_cards.html' with 
+							{ title : entry.title, url : entry.url, desc : entry.article_intro.getPage(1) , nThisCol : 4 }
+						%}
+				
+					{% endfor %}
+				</div>
+			</section>
+		{% endif %}	
+	</div>
+</main>
 {% endblock %}
 
