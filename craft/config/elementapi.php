@@ -5,11 +5,18 @@ return [
     'endpoints' => [
         'artikler.json' => [
             'elementType' => 'Entry',
-            'criteria' => ['section' => 'articles'],
+            'paginate' => true,
+            'criteria' => [
+                            'section' => 'articles',
+                            'search' => buildSeachQuery(),
+                           
+                          ],
             'transformer' => function(EntryModel $entry) {
-               $arrTags = getTags($entry->tags);
-               $arrBlocks = getMatrix($entry->article_blocks);
-                return [
+              $arrTags = getTags($entry->tags);
+
+              $arrBlocks = getMatrix($entry->article_blocks);
+
+              return [
                     'title' => $entry->title,
                     'summary' => (string)$entry->article_intro,
                     'description' =>  (string)$entry->article_description,
@@ -36,8 +43,39 @@ return [
                 },
             ];
         },
+
+
     ]
 ];
+
+function buildSeachQuery(){
+  $strQuery = "";
+  if(isset($_GET['channel'])) {
+    $strGetTags = $_GET['channel'];
+    $arrTags = explode(',', $strGetTags);  
+    $strQuery .= "article_type:'".strtolower($arrTags[0])."'";
+  } 
+  if(isset($_GET['tags'])) {
+    if(isset($_GET['channel']))
+      $strQuery .=" ( ";
+
+    $strGetTags = $_GET['tags'];
+    $arrTags = explode(',', $strGetTags);
+    
+    foreach ($arrTags as $key=>$tag) {
+      
+      $strQuery .= "tags:'".strtolower($tag)."'";
+      if($key != count($arrTags)-1)
+          $strQuery .=" OR ";
+      
+    }
+    if(isset($_GET['channel']))
+      $strQuery .=" )";
+
+  }
+  return $strQuery;
+}
+
 /**
  * [getTags description]
  * @param  [type] $tags [description]
@@ -46,7 +84,7 @@ return [
 function getTags($tags) {
     $arrTags = array();
        foreach($tags as $tag) {
-            $arrTags[] = $tag->title;
+            $arrTags[] = strtolower($tag->title);
        }
 
     return $arrTags;
@@ -88,24 +126,3 @@ function getMatrix($arrMatrix) {
 
     return $arrMatrixData;
 }
-
-/*
-  {% if block.type == 'textBlock' %}
-  {% include 'partials/_text.html' with {
-                                                          content : block.text, 
-                                                        
-                                                        } %} 
-
-                {% elseif block.type == 'htmlBlock' %}
-
-                  {% include 'partials/_text.html' with {
-                                                          content : block.html, 
-                                                        
-                                                        } %}                                           
-                {% elseif block.type == 'imageBlock' %}
-                  {% include 'partials/_image.html' with { 
-                                                          image : block.image, 
-                                                          alias : block.imagealias,
-                                                          imageText : block.imageText
-                                                        } %} 
- */

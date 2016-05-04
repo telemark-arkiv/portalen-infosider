@@ -41,6 +41,7 @@ class Tfk_portalen_search_GetService extends BaseApplicationComponent
 		if($this->nOffset >0)
 			$nFrom = $this->nOffset*$this->nHitsPerPage;
 
+		$strSearchString = str_replace(" ","+",$strSearchString);
 		$jsonData = file_get_contents($this->strSearchUrl."?query=".$strSearchString."&size=".$this->nHitsPerPage."&from=".$nFrom);
 		$objResult = json_decode($jsonData);
 	

@@ -23,13 +23,7 @@
 
             <div class="mdl-crumbs mdl-color-text--grey-500">
 
-              {% set tags = entry.tags %}
 
-              {% if tags | length %}
-                {% for tag in tags %}
-                    {{tag.title}}
-                {% endfor %}
-              {% endif %}
               
               {{ entry.article_intro}}
               
@@ -58,6 +52,14 @@
 
                 {% endif %}
               {% endfor %}
+
+               {% set tags = entry.tags %}
+              Stikkord: 
+              {% if tags | length %}
+                {% for tag in tags %}
+                    {{tag.title}}
+                {% endfor %}
+              {% endif %}
             </div>
           </div>
         </div>
