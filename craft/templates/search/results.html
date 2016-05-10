@@ -22,10 +22,15 @@
 				{% set arrSearchResult =  craft.tfk_portalen_search.getSearchResult(strSearchParam,nOffset) %}
 
 				<section class="mdl-cell mdl-cell--12-col">
-					<div>Du søkte etter {{ strSearchParam }}</div>
-					<div>Totalt antall treff : {{arrSearchResult.hits}}</div>
-					<div>Viser treff {{ arrSearchResult.nFrom}} - {{ arrSearchResult.nTo}} </div>
+					
 					<div class="mdl-grid">
+            <div class="mdl-card mdl-cell mdl-cell--12-col mdl-shadow--2dp">
+              <div class="mdl-card__supporting-text padding-large">
+                <strong>Du søkte etter {{ strSearchParam }}</strong>
+                <div>Totalt antall treff : {{arrSearchResult.hits}}</div>
+                <div>Viser treff {{ arrSearchResult.nFrom}} - {{ arrSearchResult.nTo}} </div>    
+              </div>
+            </div>
 						{% for result in arrSearchResult.result %}
 							{% include 'partials/_cards.html' with { title : result.title, url : result.url , desc : result.description , bIsExtern : true} %}	
 						{% endfor %}
