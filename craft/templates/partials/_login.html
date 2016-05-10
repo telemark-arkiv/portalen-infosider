@@ -1,18 +1,31 @@
 {% if craft.tfk_portalen_ldap.getErrorMessage %}
     {{ craft.tfk_portalen_ldap.getErrorMessage }}
   {% endif %}
-<form method="post" accept-charset="UTF-8" action="">
-  <input type="hidden" name="action" value="tfk_portalen_ldap/ldap/ldapLogin">
 
-  {{ getCsrfInput() }}
+<div class="mdl-cell mdl-cell--4-col mdl-cell--2-offset-tablet mdl-cell--4-offset-desktop">
+  <div class="card-wide mdl-card mdl-shadow--2dp">
 
+    <div class="mdl-card__title">
+      <h2 class="mdl-card__title-text">Logg inn</h2>
+    </div>
 
-  <h3><label for="loginName">Brukernavn</label></h3>
-  <input id="loginName" type="text" name="loginName" required="">
+    <form method="post" accept-charset="UTF-8" action="">
+    <div class="mdl-card__supporting-text">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input type="hidden" name="action" value="tfk_portalen_ldap/ldap/ldapLogin">
+        {{ getCsrfInput() }}
+        <label for="loginName" class="mdl-textfield__label">Brukernavn</label>
+        <input id="loginName" type="text" name="loginName" required="" class="mdl-textfield__input">
+      </div>
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <label for="password" class="mdl-textfield__label">Passord</label>
+        <input id="password" type="password" name="password" required="" class="mdl-textfield__input">
+      </div>
+    </div>
+      <div class="mdl-card__actions mdl-card--border">
+        <input type="submit" value="Logg inn" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--raised">
+      </div>
+    </form>
 
-  <h3><label for="password">Passord</label></h3>
-  <input id="password" type="password" name="password" required="">
-
-  <input type="submit" value="Login">
-
-</form>
+  </div>
+</div>
