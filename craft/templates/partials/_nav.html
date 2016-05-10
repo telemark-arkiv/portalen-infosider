@@ -27,7 +27,7 @@
 
 		<img src="images/user.jpg" class="tfk-avatar">
 		<div class="tfk-avatar-dropdown">
-			<span>hello@example.com</span>
+			<span>user@t-fk.no</span>
 			<div class="mdl-layout-spacer"></div>
 			<button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
 				<i class="material-icons" role="presentation">arrow_drop_down</i>
@@ -43,7 +43,7 @@
 	</header>
 
 	{% set matrixBlock = menu.navigation %}
-	<nav class="tfk-navigation mdl-navigation mdl-color--blue-grey-800">
+	<nav class="tfk-navigation mdl-navigation">
 		{% for block in matrixBlock %}
 		
 			<a class="mdl-navigation__link" href="{% if block.nav_url is defined and block.nav_url %} {{block.nav_url}} {% else %} / {% endif %}">

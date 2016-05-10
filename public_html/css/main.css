@@ -10599,14 +10599,15 @@ _:-ms-input-placeholder, :root .mdl-slider.mdl-slider.is-upgraded {
   height: 48px;
   border-radius: 24px; }
 
+.tfk-layout .tfk-header .mdl-layout__drawer-button {
+  background-color: transparent;
+  color: black; }
+
 .tfk-layout .tfk-header .mdl-textfield {
   padding: 0px;
   margin-top: 41px; }
   .tfk-layout .tfk-header .mdl-textfield .mdl-textfield__expandable-holder {
     bottom: 19px; }
-
-.tfk-layout .mdl-layout__header .mdl-layout__drawer-button {
-  color: rgba(0, 0, 0, 0.54); }
 
 .mdl-layout__drawer .avatar {
   margin-bottom: 16px; }
@@ -10618,7 +10619,8 @@ _:-ms-input-placeholder, :root .mdl-slider.mdl-slider.is-upgraded {
     flex-direction: row;
     align-items: center;
     color: white;
-    font-weight: 500; }
+    font-weight: 500;
+    padding: 16px; }
     .tfk-drawer .tfk-navigation .mdl-navigation__link:hover, .tfk-drawer .tfk-navigation .mdl-navigation__link:active, .tfk-drawer .tfk-navigation .mdl-navigation__link:focus {
       background-color: #ffd520;
       color: black; }
@@ -10652,11 +10654,10 @@ _:-ms-input-placeholder, :root .mdl-slider.mdl-slider.is-upgraded {
 
 .tfk-navigation {
   flex-grow: 1; }
-
-.tfk-navigation .mdl-navigation__link .material-icons {
-  font-size: 24px;
-  color: rgba(255, 255, 255, 0.56);
-  margin-right: 32px; }
+  .tfk-navigation .mdl-navigation__link .material-icons {
+    font-size: 24px;
+    color: rgba(255, 255, 255, 0.56);
+    margin-right: 16px; }
 
 /* TODO: Find a proper solution to have the graphs
  * not float around outside their container in IE10/11.
