@@ -44,13 +44,14 @@
 	{% set matrixBlock = menu.navigation %}
 	<nav class="tfk-navigation mdl-navigation">
 		{% for block in matrixBlock %}
-		
-			<a class="mdl-navigation__link" href="{% if block.nav_url is defined and block.nav_url %} {{block.nav_url}} {% else %} / {% endif %}">
-				<i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">
-					{{block.nav_icon}}
-				</i>
-				{{block.nav_title}}
-			</a>
+			{% if not block.hideFromMenu %}
+				<a class="mdl-navigation__link" href="{% if block.nav_url is defined and block.nav_url %} {{block.nav_url}} {% else %} / {% endif %}">
+					<i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">
+						{{block.nav_icon}}
+					</i>
+					{{block.nav_title}}
+				</a>
+			{% endif %}
 		{% endfor %}
 	</nav>
 	
