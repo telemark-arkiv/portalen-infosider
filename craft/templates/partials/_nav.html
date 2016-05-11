@@ -14,10 +14,16 @@
 			<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
 				<i class="material-icons">more_vert</i>
 			</button>
+			{% set topMenuBlock = toppMenu.topMenu %}
+			
 			<ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
-				<li class="mdl-menu__item">About</li>
-				<li class="mdl-menu__item">Contact</li>
-				<li class="mdl-menu__item">Legal information</li>
+				{% for block in topMenuBlock %}	
+					{% if block.isInternUrl %}
+						<li class="mdl-menu__item"><a class="mdl-menu__item"  href="{{block.topMenuUrl}}">{{block.topMenuText}}</a></li>
+					{% else %}
+						<li class="mdl-menu__item"><a class="mdl-menu__item" target="_blank" href="{{block.topMenuUrl}}">{{block.topMenuText}}</a></li>
+					{% endif %}
+				{% endfor %}
 			</ul>
 		</div>
 	</header>
@@ -32,11 +38,13 @@
 				<i class="material-icons" role="presentation">arrow_drop_down</i>
 				<span class="visuallyhidden">Accounts</span>
 			</button>
+			<!--
 			<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
 				<li class="mdl-menu__item">hello@example.com</li>
 				<li class="mdl-menu__item">info@example.com</li>
 				<li class="mdl-menu__item"><i class="material-icons">add</i>Add another account...</li>
 			</ul>
+			-->
 		</div>
 
 	</header>
