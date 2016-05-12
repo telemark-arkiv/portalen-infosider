@@ -6,13 +6,13 @@
     {# the number of pages that are displayed around the active page #}
     {% set nearbyPagesLimit = 2 %}
 
-    <div class="pagination pagination-centered">
+    <div class="pagination pagination-centered mdl-grid">
         <ul>
             {% if currentPage > 0 %}
-                <li><a href="{{ paginationPath }}&offset={{ currentPage-1 }}">&larr;</a></li>
+                <li><a class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" href="{{ paginationPath }}&offset={{ currentPage-1 }}">&larr;</a></li>
 
                 {% for i in range(1, extremePagesLimit) if ( i < currentPage - nearbyPagesLimit ) %}
-                    <li><a href="{{ paginationPath }}&offset={{ i }}">{{ i }}</a></li>
+                    <li><a class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" href="{{ paginationPath }}&offset={{ i }}">{{ i }}</a></li>
                 {% endfor %}
 
                 {% if extremePagesLimit + 1 < currentPage - nearbyPagesLimit %}
@@ -20,30 +20,30 @@
                 {% endif %}
 
                 {% for i in range(currentPage-nearbyPagesLimit, currentPage-1) if ( i > 0 ) %}
-                    <li><a href="{{ paginationPath }}&offset={{ i }}">{{ i }}</a></li>
+                    <li><a class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" href="{{ paginationPath }}&offset={{ i }}">{{ i }}</a></li>
                 {% endfor %}
             {% elseif showAlwaysFirstAndLast %}
-                <li><a href="">Previous</a></li>
+                <li><a class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" href="">Previous</a></li>
             {% endif %}
 
-            <li class="active"><a href="">{{ currentPage }}</a></li>
+            <li class="active"><a class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" href="">{{ currentPage }}</a></li>
 
             {% if currentPage < lastPage %}
                 {% for i in range(currentPage+1, currentPage + nearbyPagesLimit) if ( i <= lastPage ) %}
-                    <li><a href="{{ paginationPath }}&offset={{ i }}">{{ i }}</a></li>
+                    <li><a class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" href="{{ paginationPath }}&offset={{ i }}">{{ i }}</a></li>
                 {% endfor %}
 
                 {% if  (lastPage - extremePagesLimit) > (currentPage + nearbyPagesLimit) %}
-                   <li class="disabled"><a href="">...</a></li>
+                   <li class="disabled"><a class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" href="">...</a></li>
                 {% endif %}
 
                 {% for i in range(lastPage - extremePagesLimit+1, lastPage) if ( i > currentPage + nearbyPagesLimit ) %}
-                   <li><a href="{{ paginationPath }}&offset={{ i }}">{{ i }}</a></li>
+                   <li><a class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" href="{{ paginationPath }}&offset={{ i }}">{{ i }}</a></li>
                 {% endfor %}
 
-                <li><a href="{{ paginationPath }}&offset={{ currentPage+1 }}">&rarr;</a></li>
+                <li><a class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" href="{{ paginationPath }}&offset={{ currentPage+1 }}">&rarr;</a></li>
             {% elseif showAlwaysFirstAndLast %}
-                    <li><a href="{{ paginationPath }}&offset={{ currentPage+1 }}">Next</a></li>
+                    <li><a class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" href="{{ paginationPath }}&offset={{ currentPage+1 }}">Next</a></li>
             {% endif %}
         </ul>
     </div>
