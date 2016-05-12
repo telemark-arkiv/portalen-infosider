@@ -26,7 +26,7 @@
                 <li><a class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" href="">Previous</a></li>
             {% endif %}
 
-            <li class="active"><a class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" href="">{{ currentPage }}</a></li>
+            <li class="active"><a class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--primary" href="">{{ currentPage }}</a></li>
 
             {% if currentPage < lastPage %}
                 {% for i in range(currentPage+1, currentPage + nearbyPagesLimit) if ( i <= lastPage ) %}
