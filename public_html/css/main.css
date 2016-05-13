@@ -10613,17 +10613,22 @@ _:-ms-input-placeholder, :root .mdl-slider.mdl-slider.is-upgraded {
   margin-bottom: 16px; }
 
 .tfk-drawer {
-  border: none; }
+  border: none;
+  background-color: #ffd520; }
   .tfk-drawer .tfk-navigation .mdl-navigation__link {
     display: flex !important;
     flex-direction: row;
     align-items: center;
-    color: white;
+    color: black;
     font-weight: 500;
     padding: 16px; }
-    .tfk-drawer .tfk-navigation .mdl-navigation__link:hover, .tfk-drawer .tfk-navigation .mdl-navigation__link:active, .tfk-drawer .tfk-navigation .mdl-navigation__link:focus {
-      background-color: #ffd520;
+    .tfk-drawer .tfk-navigation .mdl-navigation__link .material-icons {
       color: black; }
+    .tfk-drawer .tfk-navigation .mdl-navigation__link:hover, .tfk-drawer .tfk-navigation .mdl-navigation__link:active, .tfk-drawer .tfk-navigation .mdl-navigation__link:focus {
+      background-color: black;
+      color: white; }
+      .tfk-drawer .tfk-navigation .mdl-navigation__link:hover .material-icons, .tfk-drawer .tfk-navigation .mdl-navigation__link:active .material-icons, .tfk-drawer .tfk-navigation .mdl-navigation__link:focus .material-icons {
+        color: white; }
 
 /* iOS Safari specific workaround */
 .tfk-drawer .mdl-menu__container {
