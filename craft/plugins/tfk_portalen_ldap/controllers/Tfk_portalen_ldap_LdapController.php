@@ -20,11 +20,17 @@ class Tfk_portalen_ldap_LdapController extends BaseController
 	 * @return [type]
 	 */
 	public function actionLdapLogin() {
-		
+		$strDomain = $_SERVER['HTTP_HOST'];
+		// dummly login on devserver.
+		if($strDomain === 'dev.telemarkportalen.vpdev.no')
+		{
+			craft()->httpSession->add('ldapUser', true);
+			return;
+		}
 		craft()->httpSession->add('loginError', false);
 
-		$loginName = craft()->request->getPost('loginName');
-		$password = craft()->request->getPost('password');
+		$strLoginName = craft()->request->getPost('loginName');
+		$strPassword = craft()->request->getPost('password');
 				
 		$strLdapServer =craft()->tfk_portalen_ldap_api->getMySetting('ldap_url');
 		$strLdapPort= "389";
@@ -43,28 +49,15 @@ class Tfk_portalen_ldap_LdapController extends BaseController
 			ldap_set_option($ds, LDAP_OPT_REFERRALS, 0);
 
 
-			$strUserBind = 'dc=domain,dc=com,uid=riemann';
-			craft()->httpSession->add('ldapUser', true);
-			return;
+			$strUserBind = str_replace("__USERNAME__", $strLoginName, $strBindDn);
+
+			
 			// binding to ldap server
-		    $ldapbind = ldap_bind($ds ,$strUserBind,"password");//,$strBindDn,$strPassword);
+		    $ldapbind = ldap_bind($ds ,$strUserBind,$strPassword);
 		    // verify binding
 		    if ($ldapbind) {
 		    	craft()->httpSession->add('ldapUser', true);
-		       /*$r = ldap_search( $ds, "dc=example,dc=com",'sn='.$strUsername);
-		       if($r){
-		       		
-		       		
-		       		$result = ldap_get_entries( $ds, $r);
-		       		if($result['count'] >0) {
-		       			
-		       		}
-		       }
-		       else {
-		       		craft()->httpSession->add('loginError','Feil kombinasjon av brukernavn og passord');
-		       }
-		       */
-		       
+		      
 		    }
 		    else
 		    	craft()->httpSession->add('loginError','Feil kombinasjon av brukernavn og passord');
