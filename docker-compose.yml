@@ -10,7 +10,8 @@ services:
             MYSQL_PASSWORD: admin123
             MYSQL_ROOT_PASSWORD: admin123
     app:
-        build: .
+        # build: .
+        image: telemark/portalen-infosider
         depends_on:
             - mysql
         expose:
