@@ -48,5 +48,34 @@ value: settings.searchFilter,
 errors: settings.getErrors('searchFilter')
 })
 }}
+{% import "_includes/forms" as forms %}
+{{ forms.textField({
+label: "path sertifikat"|t,
+id: 'pathSert',
+name: 'pathSert',
+instructions: "pathSert."|t,
+value: settings.pathSert,
+errors: settings.getErrors('pathSert')
+})
+}}
+
+
+{{ forms.textField({
+label: "port"|t,
+id: 'port',
+name: 'port',
+instructions: "port."|t,
+value: settings.port,
+errors: settings.getErrors('port')
+})
+}}
+
+{% import "_includes/forms" as forms %}
+{{  forms.checkboxField({
+      label: "SSL"|t,
+      name: 'ssl',
+      value : 'on',
+      checked: settings.ssl
+}) }}
 
 
