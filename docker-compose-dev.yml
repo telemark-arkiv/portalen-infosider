@@ -1,0 +1,41 @@
+version: '2'
+services:
+    mysql:
+        image: skilgarriff/craft-mysql
+        volumes:
+            - "./.data/db:/var/lib/mysql"
+        environment:
+            MYSQL_DATABASE: database
+            MYSQL_USER: app
+            MYSQL_PASSWORD: admin123
+            MYSQL_ROOT_PASSWORD: admin123
+    app:
+        build: .
+        # image: telemark/portalen-infosider
+        depends_on:
+            - mysql
+        expose:
+            - "9000"
+        volumes:
+            - ./public_html:/var/www/public_html
+            - ./craft/plugins:/var/www/craft/plugins
+            - ./craft/templates:/var/www/craft/templates
+            - ./craft/config:/var/www/craft/config
+            - ./craft/storage:/var/www/craft/storage
+        links:
+            - mysql
+        environment:
+            MYSQL_DATABASE: database
+            MYSQL_USER: app
+            MYSQL_PASSWORD: admin123
+            MYSQL_HOST: mysql
+    nginx:
+        build: ./nginx
+        depends_on:
+            - app
+        ports:
+            - "8088:80"
+        links:
+            - app
+        volumes_from:
+            - app
