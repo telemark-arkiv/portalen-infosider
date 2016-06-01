@@ -34,3 +34,6 @@ node_modules
 
 # don't include the license key
 license.key
+
+#don't include .data/db
+.data/db
