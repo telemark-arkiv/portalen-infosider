@@ -17,7 +17,7 @@ RUN apt-get update \
     && docker-php-ext-install mbstring \
     && docker-php-ext-install mcrypt
     
-# Install ldap
+# Install ldap, ref https://github.com/docker-library/php/issues/75
 RUN apt-get update && \
     apt-get install libldap2-dev -y && \
     rm -rf /var/lib/apt/lists/* && \
