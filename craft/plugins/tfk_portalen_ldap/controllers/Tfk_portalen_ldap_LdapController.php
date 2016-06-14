@@ -39,12 +39,12 @@ class Tfk_portalen_ldap_LdapController extends BaseController
 		$strSearchBase = craft()->tfk_portalen_ldap_api->getMySetting('searchBase');
 		$strSearchFilter = craft()->tfk_portalen_ldap_api->getMySetting('searchFilter');
 		$strSearchFilter = craft()->tfk_portalen_ldap_api->getMySetting('searchFilter');
-		$strPathSSL = craft()->tfk_portalen_ldap_api->getMySetting('pathSert');
-		$bSSL = craft()->tfk_portalen_ldap_api->getMySetting('ssl');
+		/*$strPathSSL = craft()->tfk_portalen_ldap_api->getMySetting('pathSert');
+		//$bSSL = craft()->tfk_portalen_ldap_api->getMySetting('ssl');
 
 		if($bSSL == 'on')
 			$bSSL = true;
-
+		*/
 
 		ldap_set_option(NULL, LDAP_OPT_DEBUG_LEVEL, 7);
 

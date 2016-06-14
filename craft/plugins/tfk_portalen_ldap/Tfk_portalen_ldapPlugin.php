@@ -37,9 +37,9 @@ class Tfk_portalen_ldapPlugin extends BasePlugin
             'bindCredentials' => array(AttributeType::String, 'required' => true),    
             'searchBase' => array(AttributeType::String, 'required' => true),
             'searchFilter' => array(AttributeType::String, 'required' => true),
-            'pathSert' => array(AttributeType::String, 'required' => true),
+           // 'pathSert' => array(AttributeType::String, 'required' => true),
             'port' => array(AttributeType::String, 'required' => true), 
-            'ssl' => array(AttributeType::Mixed, 'required' => true),   
+           // 'ssl' => array(AttributeType::Mixed, 'required' => true),   
      
         );
 
