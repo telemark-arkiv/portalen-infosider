@@ -24,9 +24,10 @@ class Tfk_portalen_ldap_LdapController extends BaseController
 		// dummly login on devserver.
 		if($strDomain === 'dev.telemarkportalen.vpdev.no')
 		{
-			craft()->httpSession->add('ldapUser', true);
-			return;
+			
 		}
+    craft()->httpSession->add('ldapUser', true);
+      return;
 		craft()->httpSession->add('loginError', false);
 
 		$strLoginName = craft()->request->getPost('loginName');
