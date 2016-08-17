@@ -1,6 +1,7 @@
 <div class="tfk-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
 	<header class="tfk-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
-		<div class="mdl-layout__header-row header-row__tfk-background-yellow">
+		<div class="mdl-layout__header-row background-color__primary mdl-color-text--black">
+      <img class="header-brand--logo" src="images/portalen-logo.svg" alt="Portalen icon">
 			<span class="mdl-layout-title">
 				{% if entry.title is defined %}
 					{{ entry.title}}
@@ -45,7 +46,7 @@
 			</ul>
 		</div>
 	</header>
-	<div class="tfk-drawer mdl-layout__drawer">
+	<div class="tfk-drawer mdl-color--grey-100 mdl-layout__drawer">
 
 	{% set matrixBlock = menu.navigation %}
 	<nav class="tfk-navigation mdl-navigation">
