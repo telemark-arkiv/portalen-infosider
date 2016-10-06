@@ -17,6 +17,7 @@
  # http://craftcms.com/docs/routing
  #}
 
+{% set plugin = craft.plugins.getPlugin('tfk_portalen_ldap' , false) %}
 {% extends "_layout" %}
 
 
@@ -31,9 +32,8 @@
 
 {% set bUserIsLoggedIn = craft.tfk_portalen_ldap.getLoginStatus %}
 
-{% if not bUserIsLoggedIn %}
-  
-  
+{% if plugin.isEnabled() and not bUserIsLoggedIn %}
+    
   {% include 'partials/_login.html' %} 
  
 {% else %}
