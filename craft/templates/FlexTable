@@ -1,7 +1,7 @@
   <table>
-    <caption>{{ entry.field.meta.caption }}</caption>
+    <caption>{{ entry.flexTable.meta.caption }}</caption>
     <thead>
-      {% for row in flexTable.field.thead %}
+      {% for row in entry.flexTable.thead %}
         <tr>
           {% for cell in row %}
             <{{ cell.type }} class="{{ cell.align }}">{{ cell.text }}</{{ cell.type }}>
