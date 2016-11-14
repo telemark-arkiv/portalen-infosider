@@ -1,0 +1,21 @@
+  <table>
+    <caption>{{ entry.field.meta.caption }}</caption>
+    <thead>
+      {% for row in flexTable.field.thead %}
+        <tr>
+          {% for cell in row %}
+            <{{ cell.type }} class="{{ cell.align }}">{{ cell.text }}</{{ cell.type }}>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </thead>
+    <tbody>
+      {% for row in entry.field.tbody %}
+        <tr>
+          {% for cell in row %}
+            <{{ cell.type }} class="{{ cell.align }}">{{ cell.text }}</{{ cell.type }}>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
